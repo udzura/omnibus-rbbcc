@@ -4,6 +4,16 @@
 # after package is uninstalled.
 #
 
+PREFIX="/usr"
+
+cleanup_symlinks() {
+  binaries="rbbcc"
+  for binary in $binaries; do
+    rm -f $PREFIX/bin/$binary
+  done
+}
+
 echo "rbbcc has been uninstalled!"
+cleanup_symlinks
 
 exit 0

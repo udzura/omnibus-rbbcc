@@ -5,6 +5,8 @@
 #
 
 PROGNAME=`basename $0`
+INSTALLER_DIR=/opt/rbbcc
+PREFIX="/usr"
 
 error_exit()
 {
@@ -12,6 +14,10 @@ error_exit()
   exit 1
 }
 
-echo "Thank you for installing rbbcc!"
+rm -f $PREFIX/bin/rbbcc
+ln -sf $INSTALLER_DIR/bin/rbbcc $PREFIX/bin || error_exit "Cannot link rbbcc to $PREFIX/bin"
+chown -Rh 0:0 $INSTALLER_DIR
+
+echo "Thank you for installing rbbcc! (https://github.com/udzura/rbbcc)"
 
 exit 0
