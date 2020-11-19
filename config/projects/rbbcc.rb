@@ -12,31 +12,34 @@ homepage "https://github.com/udzura/rbbcc"
 # and /opt/rbbcc on all other platforms
 install_dir "#{default_root}/#{name}"
 
-build_version Omnibus::BuildVersion.semver
+# build_version Omnibus::BuildVersion.semver
+ENV['VERSION'] ||= "0.6.2"
+build_version ENV['VERSION']
 build_iteration 1
 
 # Creates required build directories
 dependency "preparation"
 
-override :ncurses, version: "6.2"
-override :libedit, version: "20191231-3.1"
+# override :gcc, version: "9.3.0"
+# override :libedit, version: "20191231-3.1"
 # override :openssl, version: "1.1.1"
 dependency "zlib"
-dependency "ncurses"
-dependency "ncurses5"
+dependency "ncurses6"
+# dependency "ncurses5"
 dependency "openssl"
+# dependency "gcc" # FIXME: libgcc_s.so is needed but long long build
 dependency "liblzma"
-dependency "libxml2"
-dependency "libedit2"
-dependency "libbsd"
-dependency "libicu"
-dependency "python"
+# dependency "libxml2"
+# dependency "libedit2"
+# dependency "libbsd"
+# dependency "libicu"
+# dependency "python"
+# dependency "llvm-clang"
+dependency "elfutils"
 
-dependency "rbbcc"
+dependency "bcc"
 dependency "ruby"
-
-# rbbcc dependencies/components
-# dependency "somedep"
+dependency "rbbcc"
 
 exclude "**/.git"
 exclude "**/bundler/git"

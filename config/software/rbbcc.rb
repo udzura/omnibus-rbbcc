@@ -1,4 +1,26 @@
 name "rbbcc"
-default_version "0.6.1"
+default_version "default"
 
-dependency "llvm-clang"
+dependency "ruby"
+dependency "bcc"
+
+license "Apache-2.0"
+skip_transitive_dependency_licensing true
+
+source git: "https://github.com/udzura/rbbcc.git"
+relative_path "rbbcc"
+
+build do
+  env = with_standard_compiler_flags(with_embedded_path)
+  env.merge!("LD_LIBRARY_PATH" => "#{install_dir}/embedded/lib")
+
+  bundle "install", env: env
+  bundle "exec rake install", env: env
+  bundle "binstubs appbundler --path #{install_dir}/embedded/lib", env: env
+
+  # gem "build #{gemspec_name}", env: env
+
+  block do
+    appbundle "rbbcc", lockdir: project_dir, gem: "rbbcc", env: env
+  end
+end
