@@ -13,7 +13,7 @@ homepage "https://github.com/udzura/rbbcc"
 install_dir "#{default_root}/#{name}"
 
 # build_version Omnibus::BuildVersion.semver
-ENV['VERSION'] ||= "0.6.2"
+ENV['VERSION'] ||= "0.6.3"
 build_version ENV['VERSION']
 build_iteration 1
 
@@ -23,6 +23,7 @@ dependency "preparation"
 # override :gcc, version: "9.3.0"
 # override :libedit, version: "20191231-3.1"
 # override :openssl, version: "1.1.1"
+override :rbbcc, version: "default"
 dependency "zlib"
 dependency "ncurses6"
 # dependency "ncurses5"
@@ -40,6 +41,10 @@ dependency "elfutils"
 dependency "bcc"
 dependency "ruby"
 dependency "rbbcc"
+
+dependency "gem-permissions"
+dependency "shebang-cleanup"
+dependency "ruby-cleanup"
 
 exclude "**/.git"
 exclude "**/bundler/git"

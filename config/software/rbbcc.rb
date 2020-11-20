@@ -1,5 +1,5 @@
 name "rbbcc"
-default_version "default"
+default_version "v0.6.3"
 
 dependency "ruby"
 dependency "bcc"
@@ -14,7 +14,7 @@ build do
   env = with_standard_compiler_flags(with_embedded_path)
   env.merge!("LD_LIBRARY_PATH" => "#{install_dir}/embedded/lib")
 
-  bundle "install", env: env
+  bundle "install --without plugin_dev", env: env
   bundle "exec rake install", env: env
   bundle "binstubs appbundler --path #{install_dir}/embedded/lib", env: env
 
