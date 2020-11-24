@@ -8,3 +8,8 @@ pkg/*
 bin/*
 files/**/cache/
 vendor/cookbooks
+
+*.deb
+*.rpm
+*.gz
+*.tgz

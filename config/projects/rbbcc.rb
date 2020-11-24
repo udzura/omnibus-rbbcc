@@ -24,9 +24,10 @@ dependency "preparation"
 # override :libedit, version: "20191231-3.1"
 # override :openssl, version: "1.1.1"
 override :rbbcc, version: "default"
+dependency "libbz2" # when bionic...
 dependency "zlib"
 dependency "ncurses6"
-# dependency "ncurses5"
+dependency "ncurses5" # when bionic...
 dependency "openssl"
 # dependency "gcc" # FIXME: libgcc_s.so is needed but long long build
 dependency "liblzma"
