@@ -29,9 +29,9 @@ dependency "openssl"
 
 version("1.0.8") { source sha256: "ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269" }
 
-source url: "https://fossies.org/linux/misc/#{name}-#{version}.tar.gz"
+source url: "https://fossies.org/linux/misc/bzip2-#{version}.tar.gz"
 
-relative_path "#{name}-#{version}"
+relative_path "bzip2-#{version}"
 
 build do
   env = with_standard_compiler_flags(with_embedded_path)
