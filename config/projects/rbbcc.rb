@@ -13,7 +13,7 @@ homepage "https://github.com/udzura/rbbcc"
 install_dir "#{default_root}/#{name}"
 
 # build_version Omnibus::BuildVersion.semver
-ENV['VERSION'] ||= "0.6.3"
+ENV['VERSION'] ||= "0.6.4"
 build_version ENV['VERSION']
 build_iteration 1
 
