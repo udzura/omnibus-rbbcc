@@ -41,4 +41,38 @@ build do
     command "cd build/src/cc && make -j #{workers}", env: env
     command "cd build/src/cc && make -j #{workers} install", env: env
   end
+
+  if version.end_with? 'all'
+    block "Update shebangs to point to embedded Python" do
+      Dir.glob("#{install_dir}/embedded/share/bcc/tools/*") do |bin_file|
+        next if File.directory?(bin_file)
+        update_shebang = false
+        rest_of_the_file = ""
+
+        File.open(bin_file) do |f|
+          shebang = f.readline
+          if shebang.start_with?("#!") &&
+              shebang.include?("python") &&
+              !shebang.include?("#{install_dir}/embedded/bin/python3.7")
+            rest_of_the_file = f.read
+            update_shebang = true
+          end
+        end
+
+        if update_shebang
+          File.open(bin_file, "w+") do |f|
+            f.puts("#!#{install_dir}/embedded/bin/python3.7")
+            f.puts(rest_of_the_file)
+          end
+        end
+      end
+    end
+
+    block "Symlink tools to bin" do
+      Dir.glob("#{install_dir}/embedded/share/bcc/tools/*") do |bin_file|
+        next if File.directory?(bin_file)
+        command "ln -sf #{bin_file} #{install_dir}/embedded/bin"
+      end
+    end
+  end
 end
