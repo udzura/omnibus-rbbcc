@@ -31,8 +31,11 @@ build do
   command "make -j #{workers}", env: env
   command "make -j #{workers} install", env: env
 
-  # There exists no configure flag to tell Python to not compile readline support :(
-  block do
-    FileUtils.rm_f(Dir.glob("#{install_dir}/lib/python3.7/lib-dynload/dbm.*"))
+  block "Clean *.pyc from package. These will be regenerated" do
+    command "find #{install_dir}/embedded/lib -name '*.pyc' | xargs rm -f"
+  end
+
+  block "Clean unnecessary files and packages for tool use" do
+    command "rm -rf #{install_dir}/embedded/lib/python3.7/config-3.7m-x86_64-linux-gnu #{install_dir}/embedded/lib/python3.7/test"
   end
 end
