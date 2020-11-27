@@ -17,7 +17,8 @@ build do
   bundle "install --without plugin_dev", env: env
   bundle "exec rake install", env: env
   bundle "binstubs appbundler --path #{install_dir}/embedded/bin", env: env
-  bundle "binstubs bundler --path #{install_dir}/embedded/bin", env: env
+  # To replace embedded bundle command itself
+  command "/root/.rbenv/shims/bundle binstubs bundler --force --path #{install_dir}/embedded/bin", env: env
 
   # gem "build #{gemspec_name}", env: env
 
