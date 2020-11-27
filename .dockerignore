@@ -3,4 +3,5 @@
 *.gz
 pkg/*
 vendor
+cache
 *~

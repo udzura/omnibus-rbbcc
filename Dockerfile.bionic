@@ -17,18 +17,11 @@ RUN apt-get -y -q update && \
 ENV PATH /root/.rbenv/bin:/root/.rbenv/shims:$PATH
 RUN rbenv global 2.7.1
 RUN eval "$(rbenv init -)" && gem install bundler:2.1.4
-RUN git config --global user.email "udzura@udzura.jp"
-RUN git config --global user.name "Uchio Kondo"
-ADD . /app
-WORKDIR /app
 
 RUN mkdir -p /var/bundle /var/cache/omnibus
-RUN eval "$(rbenv init -)" && bundle config set path '/var/bundle' && \
-         bundle install && \
-         bundle binstub --force omnibus
-# So bad hack!!
-RUN sed -i -e 's/libffi/ffi/' "$(find /tmp/bundle -name 'software' | xargs -I{} find  {} -name 'ruby.rb')"
 
-VOLUME /var/cache/omnibus/cache
+ADD build.sh /build.sh
+RUN chmod a+x /*.sh
+# VOLUME /var/cache/omnibus/cache
 
-ENTRYPOINT ["/app/build.sh"]
+ENTRYPOINT ["/build.sh"]
