@@ -31,4 +31,4 @@ jobs:
         path: /var/cache/omnibus
         key: ${{ runner.os }}-var_cache_omnibus
     - name: Run Build
-      run: /build.sh ${{ matrix.target }}
+      run: ./build.sh ${{ matrix.target }}

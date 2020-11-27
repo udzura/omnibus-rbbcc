@@ -6,6 +6,7 @@ git config --global user.email "udzura@udzura.jp"
 git config --global user.name "Uchio Kondo"
 bundle config set path '/var/bundle'
 bundle install
+bundle binstub --force bundler
 bundle binstub --force omnibus
 
 # So bad hack!!
