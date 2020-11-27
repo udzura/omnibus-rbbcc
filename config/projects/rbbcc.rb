@@ -14,7 +14,8 @@ install_dir "#{default_root}/#{name}"
 
 # build_version Omnibus::BuildVersion.semver
 ENV['VERSION'] ||= "0.6.4"
-build_version ENV['VERSION']
+codename = `lsb_release -c`.chomp.split[-1]
+build_version [ENV['VERSION'], codename].join("-")
 build_iteration 1
 
 # Creates required build directories

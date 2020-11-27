@@ -11,7 +11,8 @@ install_dir "#{default_root}/bcc"
 
 # build_version Omnibus::BuildVersion.semver
 ENV['VERSION'] ||= "0.16.0"
-build_version ENV['VERSION']
+codename = `lsb_release -c`.chomp.split[-1]
+build_version [ENV['VERSION'], codename].join("-")
 build_iteration 1
 
 # Creates required build directories
