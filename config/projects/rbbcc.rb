@@ -46,6 +46,7 @@ dependency "rbbcc"
 dependency "gem-permissions"
 dependency "shebang-cleanup"
 dependency "ruby-cleanup"
+dependency "clean-archives"
 
 exclude "**/.git"
 exclude "**/bundler/git"

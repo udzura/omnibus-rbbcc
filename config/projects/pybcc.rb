@@ -32,5 +32,7 @@ dependency "elfutils"
 
 dependency "bcc"
 
+dependency "clean-archives"
+
 exclude "**/.git"
 exclude "**/bundler/git"
