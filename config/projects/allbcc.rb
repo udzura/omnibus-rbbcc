@@ -10,7 +10,8 @@ install_dir "#{default_root}/#{name}"
 
 # build_version Omnibus::BuildVersion.semver
 ENV['VERSION'] ||= "0.6.4"
-build_version ENV['VERSION']
+codename = `lsb_release -c`.chomp.split[-1]
+build_version [ENV['VERSION'], codename].join("-")
 build_iteration 1
 
 # Creates required build directories
@@ -18,7 +19,7 @@ dependency "preparation"
 
 # override :gcc, version: "9.3.0"
 # override :libedit, version: "20191231-3.1"
-# override :openssl, version: "1.1.1"
+override :openssl, version: "1.1.1d"
 override :bcc, version: "0.16.0-all"
 override :rbbcc, version: "default"
 dependency "libbz2" # when bionic...

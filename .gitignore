@@ -13,3 +13,6 @@ vendor/cookbooks
 *.rpm
 *.gz
 *.tgz
+
+cache/*
+!cache/.gitkeep

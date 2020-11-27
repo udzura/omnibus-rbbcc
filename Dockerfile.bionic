@@ -1,0 +1,34 @@
+FROM ubuntu:bionic
+
+RUN sed -i.bak -r 's!deb http://archive\S+!deb mirror://mirrors.ubuntu.com/mirrors.txt!' /etc/apt/sources.list
+RUN apt-get -y -q update && \
+    apt-get -y -q install ca-certificates && \
+    apt-get -y -q install bison flex git cmake python curl lsb-release \
+        autoconf build-essential libssl-dev libyaml-dev \
+        libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm-dev \
+        libpython2.7 libpython2.7-dev libbsd0 libbsd-dev libyajl-dev \
+        libicu-dev libxml2 libxml2-dev liblzma5 liblzma-dev \
+        llvm-9 clang-9 llvm-9-dev libclang-9-dev && \
+    apt-get -y -q purge && \
+    git clone https://github.com/rbenv/rbenv.git /root/.rbenv && \
+    git clone https://github.com/rbenv/ruby-build.git /root/.rbenv/plugins/ruby-build && \
+    /root/.rbenv/bin/rbenv install 2.7.1
+
+ENV PATH /root/.rbenv/bin:/root/.rbenv/shims:$PATH
+RUN rbenv global 2.7.1
+RUN eval "$(rbenv init -)" && gem install bundler:2.1.4
+RUN git config --global user.email "udzura@udzura.jp"
+RUN git config --global user.name "Uchio Kondo"
+ADD . /app
+WORKDIR /app
+
+RUN mkdir -p /var/bundle /var/cache/omnibus
+RUN eval "$(rbenv init -)" && bundle config set path '/var/bundle' && \
+         bundle install && \
+         bundle binstub --force omnibus
+# So bad hack!!
+RUN sed -i -e 's/libffi/ffi/' "$(find /tmp/bundle -name 'software' | xargs -I{} find  {} -name 'ruby.rb')"
+
+VOLUME /var/cache/omnibus/cache
+
+ENTRYPOINT ["/app/build.sh"]
