@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        target: [rbbcc, pybcc, allbcc]
+        target: [rbbcc]
 
     steps:
     - uses: actions/checkout@v2
