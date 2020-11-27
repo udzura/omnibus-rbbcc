@@ -10,6 +10,6 @@ bundle binstub --force bundler
 bundle binstub --force omnibus
 
 # So bad hack!!
-sed -i -e 's/libffi/ffi/' "$(find /tmp/bundle -name 'software' | xargs -I{} find  {} -name 'ruby.rb')"
+sed -i -e 's/libffi/ffi/' "$(find /var/bundle -name 'software' | xargs -I{} find {} -name 'ruby.rb')"
 
 ./bin/omnibus build "$@"
