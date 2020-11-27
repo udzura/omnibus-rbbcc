@@ -71,7 +71,7 @@ build do
     block "Symlink tools to bin" do
       Dir.glob("#{install_dir}/embedded/share/bcc/tools/*") do |bin_file|
         next if File.directory?(bin_file)
-        command "ln -sf #{bin_file} #{install_dir}/embedded/bin"
+        command "ln -sf #{bin_file} #{install_dir}/bin"
       end
     end
   end

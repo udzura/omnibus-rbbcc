@@ -10,6 +10,7 @@ dependency "ncurses5"
 dependency "zlib"
 dependency "openssl"
 dependency "libbz2"
+dependency "libffi"
 
 source :url => "http://python.org/ftp/python/#{version}/Python-#{version}.tgz",
        :sha256 => '39b018bc7d8a165e59aa827d9ae45c45901739b0bbb13721e4f973f3521c166a'
