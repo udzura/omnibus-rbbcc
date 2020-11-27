@@ -16,6 +16,7 @@ build do
 
   bundle "install --without plugin_dev", env: env
   bundle "exec rake install", env: env
+  bundle "binstubs bundler --force", env: env
   bundle "binstubs appbundler --path #{install_dir}/embedded/bin", env: env
 
   # gem "build #{gemspec_name}", env: env
