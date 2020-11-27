@@ -1,5 +1,5 @@
 name "rbbcc"
-default_version "v0.6.3"
+default_version "v0.6.4"
 
 dependency "ruby"
 dependency "bcc"
