@@ -21,7 +21,7 @@ dependency "preparation"
 # override :libedit, version: "20191231-3.1"
 override :openssl, version: "1.1.1d"
 override :bcc, version: "0.16.0-all"
-override :rbbcc, version: "default"
+override :rbbcc, version: ("v" + ENV['VERSION'])
 dependency "libbz2" # when bionic...
 dependency "zlib"
 # dependency "ncurses6"
