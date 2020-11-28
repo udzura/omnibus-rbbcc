@@ -3,29 +3,18 @@ rbbcc Omnibus project
 This project creates full-stack platform-specific packages for
 `rbbcc`!
 
-Installation
-------------
-You must have a sane Ruby 2.0.0+ environment with Bundler installed. Ensure all
-the required gems are installed:
+![Test Building Result](https://github.com/udzura/omnibus-rbbcc/workflows/Test%20Build/badge.svg)
 
-```shell
-$ bundle install --binstubs
-```
-
-Usage
------
 ### Build
 
 You create a platform-specific package using the `build project` command:
 
 ```shell
+$ bundle install
 $ bin/omnibus build rbbcc
 ```
 
-The platform/architecture type of the package created will match the platform
-where the `build project` command is invoked. For example, running this command
-on a MacBook Pro will generate a Mac OS X package. After the build completes
-packages will be available in the `pkg/` folder.
+Packages will be available in the `pkg/` folder. Only tested for Ubuntu Linux.
 
 ### Clean
 
@@ -78,47 +67,3 @@ omnibus manifest PROJECT -l warn
 
 This will output a JSON-formatted manifest containing the resolved
 version of every software definition.
-
-
-Kitchen-based Build Environment
--------------------------------
-Every Omnibus project ships with a project-specific
-[Berksfile](https://docs.chef.io/berkshelf.html) that will allow you to build
-your omnibus projects on all of the platforms listed in the
-[`.kitchen.yml`](.kitchen.yml). You can add/remove additional platforms as
-needed by changing the list found in the [`.kitchen.yml`](.kitchen.yml)
-`platforms` YAML stanza.
-
-This build environment is designed to get you up-and-running quickly. However,
-there is nothing that restricts you from building on other platforms. Simply use
-the [omnibus cookbook](https://github.com/chef-cookbooks/omnibus) to setup your
-desired platform and execute the build steps listed above.
-
-The default build environment requires Test Kitchen and VirtualBox for local
-development. Test Kitchen also exposes the ability to provision instances using
-various cloud providers like AWS, DigitalOcean, or OpenStack. For more
-information, please see the [Test Kitchen documentation](https://kitchen.ci/).
-
-Once you have tweaked your [`.kitchen.yml`](.kitchen.yml) (or
-[`.kitchen.local.yml`](.kitchen.local.yml)) to your liking, you can bring up an
-individual build environment using the `kitchen` command.
-
-
-```shell
-$ bin/kitchen converge ubuntu-1804
-```
-
-Then login to the instance and build the project as described in the Usage
-section:
-
-```shell
-$ bin/kitchen login ubuntu-1804
-[vagrant@ubuntu...] $ .  load-omnibus-toolchain.sh
-[vagrant@ubuntu...] $ [ -e .bundle ] && sudo chown -R vagrant:vagrant .bundle
-[vagrant@ubuntu...] $ cd rbbcc   # or 'cd rbbcc/omnibus' if your omnibus project is embedded in your main project
-[vagrant@ubuntu...] $ bundle install
-[vagrant@ubuntu...] $ bin/omnibus build rbbcc
-```
-
-For a complete list of all commands and platforms, run `kitchen list` or
-`kitchen help`.
