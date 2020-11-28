@@ -10,7 +10,7 @@ RUN apt-get -y -q update && \
         libreadline6-dev zlib1g-dev libncurses-dev libffi-dev libgdbm-dev \
         libpython2.7 libpython2.7-dev libbsd0 libbsd-dev libyajl-dev \
         libicu-dev libxml2 libxml2-dev liblzma5 liblzma-dev \
-        llvm-10 clang-10 llvm-10-dev libclang-10-dev && \
+        llvm-9 clang-9 llvm-9-dev libclang-9-dev && \
     apt-get -y -q purge && \
     git clone https://github.com/rbenv/rbenv.git /root/.rbenv && \
     git clone https://github.com/rbenv/ruby-build.git /root/.rbenv/plugins/ruby-build && \
