@@ -26,7 +26,7 @@ dependency "libbz2" # when bionic...
 dependency "zlib"
 
 if codename == 'focal' # This is for llvm 10
-  overwrite :ncurses5, version: "6.2"
+  override :ncurses5, version: "6.2"
 end
 dependency "ncurses5" # when bionic...
 dependency "openssl"
