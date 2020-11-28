@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+# Fixme name butting
 name "ncurses5"
 default_version "5.9"
 
@@ -25,6 +26,7 @@ skip_transitive_dependency_licensing true
 dependency "config_guess"
 
 version("5.9") { source md5: "8cb9c412e5f2d96bc6f459aa8c6282a1", url: "https://ftp.gnu.org/gnu/ncurses/ncurses-5.9.tar.gz" }
+version("6.2") { source md5: "e812da327b1c2214ac1aed440ea3ae8d", url: "https://ftp.gnu.org/gnu/ncurses/ncurses-6.2.tar.gz" }
 
 relative_path "ncurses-#{version}"
 

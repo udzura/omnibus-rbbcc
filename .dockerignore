@@ -1,0 +1,7 @@
+*.deb
+*.zip
+*.gz
+pkg/*
+vendor
+cache
+*~
