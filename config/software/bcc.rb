@@ -7,6 +7,11 @@ license "Apache-2.0"
 license_file "LICENSE.txt"
 skip_transitive_dependency_licensing true
 
+codename = `lsb_release -c`.chomp.split[-1]
+if codename == 'focal' # This is for llvm 10
+  dependency "ncurses6"
+end
+
 version("0.16.0") {
   source url: "https://github.com/iovisor/bcc/releases/download/v#{version}/bcc-src-with-submodule.tar.gz",
          sha256: "7a4551cae82964e5359ebd0df645824a82539ad0f6a86b27fc399680aed767f7"
