@@ -18,8 +18,9 @@ build do
   bundle "exec rake install", env: env
   bundle "binstubs appbundler --path #{install_dir}/embedded/bin", env: env
   # To replace embedded bundle command itself
-  home = ENV['HOME'] || '/root'
-  command "#{home}/.rbenv/shims/bundle binstubs bundler --force --path #{install_dir}/embedded/bin", env: env
+  home = ['/root', ENV['HOME']].find {|path| File.directory? "#{path}/.rbenv" }
+  command "#{home}/.rbenv/shims/bundle binstubs bundler --force --path #{install_dir}/embedded/bin",
+          env: env
 
   # gem "build #{gemspec_name}", env: env
 
