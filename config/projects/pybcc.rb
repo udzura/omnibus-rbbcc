@@ -24,8 +24,12 @@ dependency "preparation"
 override :bcc, version: "0.16.0-all"
 dependency "libbz2" # when bionic...
 dependency "zlib"
-# dependency "ncurses6"
-dependency "ncurses5" # when bionic...
+
+if codename == 'focal' # This is for llvm 10
+  overwrite :ncurses5, version: "6.2"
+end
+dependency "ncurses5"
+
 dependency "openssl"
 # dependency "gcc" # FIXME: libgcc_s.so is needed but long long build
 dependency "liblzma"

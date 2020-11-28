@@ -27,7 +27,10 @@ dependency "preparation"
 override :rbbcc, version: ("v" + ENV['VERSION'])
 dependency "libbz2" # when bionic...
 dependency "zlib"
-# dependency "ncurses6"
+
+if codename == 'focal' # This is for llvm 10
+  overwrite :ncurses5, version: "6.2"
+end
 dependency "ncurses5" # when bionic...
 dependency "openssl"
 # dependency "gcc" # FIXME: libgcc_s.so is needed but long long build

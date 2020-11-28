@@ -8,9 +8,6 @@ license_file "LICENSE.txt"
 skip_transitive_dependency_licensing true
 
 codename = `lsb_release -c`.chomp.split[-1]
-if codename == 'focal' # This is for llvm 10
-  dependency "ncurses6"
-end
 
 version("0.16.0") {
   source url: "https://github.com/iovisor/bcc/releases/download/v#{version}/bcc-src-with-submodule.tar.gz",
