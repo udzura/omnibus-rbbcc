@@ -17,8 +17,8 @@ jobs:
   build:
     strategy:
       matrix:
-        target: [rbbcc, allbcc]
-        distro: [focal, bionic, xenial]
+        target: [rbbcc]
+        distro: [bionic, xenial]
 
     runs-on: ubuntu-18.04
     container: docker.io/udzura/omnibus-rbbcc-builder:${{ matrix.distro }}
