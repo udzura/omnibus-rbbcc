@@ -15,12 +15,13 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
-    container: docker.io/udzura/omnibus-rbbcc-builder:bionic
-
     strategy:
       matrix:
         target: [rbbcc]
+        distro: [bionic, xenial]
+
+    runs-on: ubuntu-18.04
+    container: docker.io/udzura/omnibus-rbbcc-builder:${{ matrix.distro }}
 
     steps:
     - uses: actions/checkout@v2
@@ -29,6 +30,6 @@ jobs:
       uses: actions/cache@v2
       with:
         path: /var/cache/omnibus
-        key: ${{ runner.os }}-var_cache_omnibus
+        key: ${{ runner.os }}-${{ matrix.distro }}-var_cache_omnibus
     - name: Run Build
       run: ./build.sh ${{ matrix.target }}
